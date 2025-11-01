@@ -734,21 +734,7 @@ public class SpeechToTextPlugin :
     }
 
     override fun onEndOfSpeech() {
-        (previousPauseFor ?: 1000).also {
-            timerTask = object : TimerTask() {
-                override fun run() {
-                    timer = null
-                    handler.post {
-                        run {
-                            notifyListening(isRecording = false)
-                        }
-                    }
-                }
-            }
-            timer = Timer().apply {
-                schedule(timerTask, it.toLong())
-            }
-        }
+         // Do nothing — keeps listening even after you stop talking
     }
 
     override fun onError(errorCode: Int) {
